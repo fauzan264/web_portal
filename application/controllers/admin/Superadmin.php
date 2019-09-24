@@ -381,7 +381,7 @@ class Superadmin extends CI_Controller
 	      				'allowed_types' => '.gif|jpg|png|jpeg',
 	      				'max_size'		=> '1000', //KB
 			  );
-			$note = if
+			// $note = if
 	      	$this->load->library('upload', $config);
 			if (! $this->upload->do_upload('img_iklan')) {
 	        	$iklan = $this->m_admin->getmasterdataiklan("WHERE id_iklan = '$id_iklan' ");
