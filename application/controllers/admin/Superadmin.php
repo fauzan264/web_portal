@@ -259,12 +259,29 @@ class Superadmin extends CI_Controller
 		$this->load->view('admin/v_dataiklanheader', $data);
 	}
 
-	public function editdataiklanheader($id_iklan = '')
+	public function editdataiklanheader($id_iklan = 'id_iklan')
 	{
 	    $valid = $this->form_validation;
 
 	    $valid->set_rules('img_iklan','Img Iklan','required',
 		array('required' => 'Img Iklan harus diisi'));
+
+		$update = $this->input->post('update');
+
+		if($update){
+			$id_iklan = $this->input->post('id_iklan');
+			$data = array(
+					'url_iklan'   	=> $this->input->post('url_iklan', TRUE),
+					'judul_iklan'   => $this->input->post('judul_iklan', TRUE),
+			);
+	
+			$id = $this->db->where('id_iklan', $id_iklan);
+			$query = $this->db->get('tbl_masterdataiklan');
+			$row = $query->row();
+	
+			$this->m_admin->Updatedata('tbl_masterdataiklan', $data, array('id_iklan' => $id_iklan));
+			echo "<script>alert('Berhasil');window.location='".base_url()."admin/superadmin/dataiklanheader';</script>";
+		}
 
 	    if ($valid->run() === FALSE)
 	    {
@@ -356,8 +373,8 @@ class Superadmin extends CI_Controller
 	{
 	    $id_user = $this->session->userdata('id');
 	    $data = array(
-	          'title'     => 'Data Iklan Footer', 
-	          'subtitle'     => 'Data Iklan Footer', 
+	          'title'     => 'Data Iklan Sidebar', 
+	          'subtitle'     => 'Data Iklan Sidebar', 
 	          'listdataiklansidebar' => $this->m_admin->getdataiklansidebar(),
 	          'users_aktif'   => $this->m_admin->getdataadmin("WHERE id_admin = $id_user"),
 	    );
@@ -366,15 +383,32 @@ class Superadmin extends CI_Controller
 
 	}
 
-	public function editdataiklansidebar($id_iklan = '')
+	public function editdataiklansidebar($id_iklan = 'id_iklan')
 	{
-	    // $valid = $this->form_validation;
+		$valid = $this->form_validation;
 
-	    // $valid->set_rules('img_iklan','Img Iklan','required',
-		// array('required' => 'Img Iklan harus diisi'));
+	    $valid->set_rules('img_iklan','Img Iklan','required',
+		array('required' => 'Img Iklan harus diisi'));
 
-	    // if ($_FILES['img_iklan']['error'])
-	    // {
+		$update = $this->input->post('update');
+
+		if($update){
+			$id_iklan = $this->input->post('id_iklan');
+			$data = array(
+						'url_iklan'   	=> $this->input->post('url_iklan', TRUE),
+						'judul_iklan'   => $this->input->post('judul_iklan', TRUE),
+			);
+	
+			$id = $this->db->where('id_iklan', $id_iklan);
+			$query = $this->db->get('tbl_masterdataiklan');
+			$row = $query->row();
+	
+			$this->m_admin->Updatedata('tbl_masterdataiklan', $data, array('id_iklan' => $id_iklan));
+			echo "<script>alert('Berhasil');window.location='".base_url()."admin/superadmin/dataiklansidebar';</script>";
+		}
+
+	    if ($valid->run() === FALSE)
+	    {
 	      	$id_user = $this->session->userdata('id');
 	      	$config = array(
 	      				'upload_path' 	=> './assets/admin/upload/iklan/',
@@ -384,7 +418,7 @@ class Superadmin extends CI_Controller
 			// $note = if
 	      	$this->load->library('upload', $config);
 			if (! $this->upload->do_upload('img_iklan')) {
-	        	$iklan = $this->m_admin->getmasterdataiklan("WHERE id_iklan = '$id_iklan' ");
+	        	$iklan = $this->m_admin->getmasterdataiklan("WHERE id_iklan = $id_iklan ");
 		        $id_user = $this->session->userdata('id');
 		        $data = array(
 				            'title'     		=> 'Edit Data Iklan Sidebar',
@@ -397,17 +431,13 @@ class Superadmin extends CI_Controller
 		        );
 	        	$this->load->view('admin/v_editdataiklansidebar',$data);
 	      	}else{
-				$upload_data	= array('uploads' => $this->upload->data());
-				
-				$new_name = time().$_FILES['userfile']['name'];
+		      	$upload_data         = array('uploads' => $this->upload->data());
 			    $config = array(
-							'upload_path'		=> './assets/admin/upload/iklan/',
-					        'image_library'   	=> 'gd2',
-					        // 'source_image'    	=> './assets/admin/upload/iklan/'.$upload_data['uploads']['file_name'],
-							'create_thumb'		=> true,
-							'file_name'			=> $new_name,
-					        'maintain_ratio'	=> true,
-					        'thumb_marker'		=> '',
+					          'image_library'   => 'gd2',
+					          'source_image'     => './assets/admin/upload/iklan/'.$upload_data['uploads']['file_name'],
+					          'create_thumb'     => true,
+					          'maintain_ratio'   => true,
+					          'thumb_marker'     => '',
 		      	);
 		      	$this->load->library('image_lib', $config);
 		      	$this->image_lib->resize();
@@ -432,11 +462,11 @@ class Superadmin extends CI_Controller
 
 					unlink("./assets/admin/upload/iklan/$row->img_iklan");
 					$this->m_admin->Updatedata('tbl_masterdataiklan', $data, array('id_iklan' => $id_iklan));
-					// echo "<script>alert('Berhasil');window.location='".base_url()."admin/superadmin/dataiklansidebar';</script>";
+					echo "<script>alert('Berhasil');window.location='".base_url()."admin/superadmin/dataiklansidebar';</script>";
 				
 				}
 	      	} 
-	    // }
+	    }
 	}
 
 	public function hapusdataiklansidebar()
@@ -481,6 +511,23 @@ class Superadmin extends CI_Controller
 
 	    $valid->set_rules('img_iklan','Img Iklan','required',
 		array('required' => 'Img Iklan harus diisi'));
+
+		$update = $this->input->post('update');
+
+		if($update){
+			$id_iklan = $this->input->post('id_iklan');
+			$data = array(
+						'url_iklan'   	=> $this->input->post('url_iklan', TRUE),
+						'judul_iklan'   => $this->input->post('judul_iklan', TRUE),
+			);
+	
+			$id = $this->db->where('id_iklan', $id_iklan);
+			$query = $this->db->get('tbl_masterdataiklan');
+			$row = $query->row();
+	
+			$this->m_admin->Updatedata('tbl_masterdataiklan', $data, array('id_iklan' => $id_iklan));
+			echo "<script>alert('Berhasil');window.location='".base_url()."admin/superadmin/dataiklanfooter';</script>";
+		}
 
 	    if ($valid->run() === FALSE)
 	    {

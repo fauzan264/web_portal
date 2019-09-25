@@ -58,14 +58,14 @@
         <!-- /.box-header -->
         <div class="box-body">
           <div class="row">
-            <form method="post" action="<?php echo base_url('admin/superadmin/editdataiklanheader');?>" enctype="multipart/form-data"> 
+            <form method="post" action="<?php echo base_url('admin/superadmin/editdataiklansidebar');?>" enctype="multipart/form-data"> 
               <!-- /.col -->
               <div class="col-md-12">
                 <!-- /.form-group -->
                 <div class="form-group">
                   <label for="juduliklan">Judul Iklan</label>
-                  <input type="hidden" name="id_iklan" id="id_iklan" value="<?php echo (isset($id_iklan)) ? $id_iklan : "";?>">
-                  <input type="text" name="judul_iklan" id="judul_iklan" class="form-control" value="<?php echo (isset($judul_iklan)) ? $judul_iklan : "";?>">
+                  <input type="hidden" name="id_iklan" id="id_iklan" value="<?php echo (isset($id_iklan)) ? $id_iklan : "id_iklan";?>">
+                  <input type="text" name="judul_iklan" id="judul_iklan" class="form-control" value="<?php echo (isset($judul_iklan)) ? $judul_iklan : "judul_iklan";?>">
                 </div>
               </div>
               <div class="col-md-12">
@@ -77,7 +77,7 @@
                 <!-- /.form-group -->
                 <div class="form-group">
                   <label for="gambarIklan">Ganti Gambar</label>
-                  <input type="file" name="img_iklan" id="gambarIklan" class="form-control" value="<?php echo (isset($img_iklan)) ? $img_iklan : "";?>">
+                  <input type="file" name="img_iklan" id="gambarIklan" class="form-control" value="<?php echo (isset($img_iklan)) ? $img_iklan : "$img_iklan";?>">
                   <span style="font-size: .9em; font-style: italic">
                     Data harus berformat jpg dan png dengan ukuran 360 x 150
                   </span>
@@ -86,7 +86,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for='urliklan'>Url Iklan</label>
-                  <input type="text" name="url_iklan" id="url_iklan" class="form-control" value="<?php echo (isset($url_iklan)) ? $url_iklan : "";?>">
+                  <input type="text" name="url_iklan" id="url_iklan" class="form-control" value="<?php echo (isset($url_iklan)) ? $url_iklan : "url_iklan";?>">
                 </div>
                 <!-- /.form-group -->
               </div>

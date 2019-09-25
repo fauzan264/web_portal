@@ -64,8 +64,8 @@
                 <!-- /.form-group -->
                 <div class="form-group">
                   <label for="juduliklan">Judul Iklan</label>
-                  <input type="hidden" name="id_iklan" id="id_iklan" value="<?php echo (isset($id_iklan)) ? $id_iklan : "";?>">
-                  <input type="text" name="judul_iklan" id="judul_iklan" class="form-control" value="<?php echo (isset($judul_iklan)) ? $judul_iklan : "";?>">
+                  <input type="hidden" name="id_iklan" id="id_iklan" value="<?php echo (isset($id_iklan)) ? $id_iklan : "id_iklan";?>">
+                  <input type="text" name="judul_iklan" id="judul_iklan" class="form-control" value="<?php echo (isset($judul_iklan)) ? $judul_iklan : "judul_iklan";?>">
                 </div>
               </div>
               <div class="col-md-12">

@@ -76,7 +76,7 @@
                         <td><img src="<?php echo base_url('assets/admin/upload/iklan/'.$data['img_iklan']);?>" width="100" height="100"></td>
                         <td><?php echo $data['url_iklan'];?></td>
                         <td>
-                          <a href="<?php echo base_url('admin/superadmin/editdataiklansidebar/'.$data['id_iklan']);?>"><i class="glyphicon glyphicon-pencil"></i></a></a>
+                          <a href="<?php echo base_url('admin/superadmin/editdataiklanheader/'.$data['id_iklan']);?>"><i class="glyphicon glyphicon-pencil"></i></a></a>
                           <a href="#" data-toggle="modal" data-target="#modal-default<?php echo $data['id_iklan'];?>"><i class="glyphicon glyphicon-trash text-danger"></i></a>
                         </td>
                       </tr>
